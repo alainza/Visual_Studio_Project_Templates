@@ -1,3 +1,6 @@
+# Visual Studio Project Templates
+This repository contains project templates for Visual Studio
+
 # xamldirectxcppwinrt project template
 Visual Studio template to create a DirectX and XAML application using C++ WinRT.
 
