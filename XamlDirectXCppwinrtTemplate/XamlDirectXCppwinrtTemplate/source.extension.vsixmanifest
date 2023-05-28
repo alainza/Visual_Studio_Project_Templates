@@ -4,6 +4,7 @@
         <Identity Id="XamlDirectXCppwinrtTemplate.9f863dd6-3abe-4feb-91cd-c7f1fbf35e7d" Version="1.0" Language="en-US" Publisher="Alain ZANCHETTA" />
         <DisplayName>XAML DirectX 11 C++/WinRT Project Template</DisplayName>
         <Description xml:space="preserve">Template to create XAML DirectX 11 C++/WinRT Projects.</Description>
+        <Icon>__TemplateIcon.ico</Icon>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0, 18.0)">
