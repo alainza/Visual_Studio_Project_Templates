@@ -1,7 +1,7 @@
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
-    <Name>CppWinRT DirectX 11 and XAML App</Name>
-    <Description>DirectX 11 and XAML Application (Universal Windows - C++/WinRT)</Description>
+    <Name>DirectX 11 and XAML Application (Universal Windows - C++/WinRT)</Name>
+    <Description>A project for a Universal Windows Platform app that uses DirectX 11 and XAML</Description>
     <ProjectType>VC</ProjectType>
     <ProjectSubType>
     </ProjectSubType>
