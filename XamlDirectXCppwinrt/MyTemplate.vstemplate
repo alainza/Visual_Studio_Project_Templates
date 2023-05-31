@@ -7,11 +7,15 @@
     </ProjectSubType>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>
-    <DefaultName>CppWinRT DirectX 11 and XAML App</DefaultName>
+    <DefaultName>XamlDirectXCppwinrtApp</DefaultName>
     <ProvideDefaultName>true</ProvideDefaultName>
     <LocationField>Enabled</LocationField>
     <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
     <Icon>__TemplateIcon.ico</Icon>
+	<LanguageTag>Cpp</LanguageTag>
+	<LanguageTag>xaml</LanguageTag>
+	<PlatformTag>Windows</PlatformTag>
+	<ProjectTypeTag>UWP</ProjectTypeTag>
   </TemplateData>
   <TemplateContent>
       <Project ReplaceParameters="true" TargetFileName="XamlCppwinrt.vcxproj" File="XamlCppwinrt.vcxproj">

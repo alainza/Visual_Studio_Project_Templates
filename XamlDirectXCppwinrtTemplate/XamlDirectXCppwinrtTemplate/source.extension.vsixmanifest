@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+    <Metadata>
+        <Identity Id="XamlDirectXCppwinrtTemplate.9f863dd6-3abe-4feb-91cd-c7f1fbf35e7d" Version="1.0" Language="en-US" Publisher="Alain ZANCHETTA" />
+        <DisplayName>XAML DirectX 11 C++/WinRT Project Template</DisplayName>
+        <Description xml:space="preserve">Template to create XAML DirectX 11 C++/WinRT Projects.</Description>
+        <MoreInfo>https://github.com/alainza/Visual_Studio_Project_Templates</MoreInfo>
+        <Icon>__TemplateIcon.ico</Icon>
+        <Tags>C++ XAML Windows UWP Games</Tags>
+    </Metadata>
+    <Installation>
+        <InstallationTarget Version="[16.0,18.0)" Id="Microsoft.VisualStudio.Community">
+            <ProductArchitecture>amd64</ProductArchitecture>
+        </InstallationTarget>
+        <InstallationTarget Version="[16.0,18.0)" Id="Microsoft.VisualStudio.Pro">
+            <ProductArchitecture>amd64</ProductArchitecture>
+        </InstallationTarget>
+        <InstallationTarget Version="[16.0,18.0)" Id="Microsoft.VisualStudio.Enterprise">
+            <ProductArchitecture>amd64</ProductArchitecture>
+        </InstallationTarget>
+    </Installation>
+    <Dependencies>
+    </Dependencies>
+    <Prerequisites>
+        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[17.0,18.0)" DisplayName="Visual Studio core editor" />
+    </Prerequisites>
+    <Assets>
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="File" Path="ProjectTemplates" d:TargetPath="ProjectTemplates\XamlDirectXCppwinrt.zip" />
+    </Assets>
+</PackageManifest>
