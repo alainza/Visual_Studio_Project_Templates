@@ -6,6 +6,7 @@
         <Description xml:space="preserve">Template to create XAML DirectX 11 C++/WinRT Projects.</Description>
         <MoreInfo>https://github.com/alainza/Visual_Studio_Project_Templates</MoreInfo>
         <Icon>__TemplateIcon.ico</Icon>
+        <Tags>C++ XAML Windows UWP Games</Tags>
     </Metadata>
     <Installation>
         <InstallationTarget Version="[16.0,18.0)" Id="Microsoft.VisualStudio.Community">
@@ -19,13 +20,11 @@
         </InstallationTarget>
     </Installation>
     <Dependencies>
-        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
     </Dependencies>
     <Prerequisites>
         <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[17.0,18.0)" DisplayName="Visual Studio core editor" />
     </Prerequisites>
     <Assets>
-        <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
         <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="File" Path="ProjectTemplates" d:TargetPath="ProjectTemplates\XamlDirectXCppwinrt.zip" />
     </Assets>
 </PackageManifest>
