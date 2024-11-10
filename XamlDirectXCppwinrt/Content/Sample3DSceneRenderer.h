@@ -11,7 +11,7 @@ namespace winrt::$projectname$::implementation
 	{
 	public:
 		Sample3DSceneRenderer(const std::shared_ptr<DX::DeviceResources>& deviceResources);
-		std::future<void> CreateDeviceDependentResources();
+		winrt::fire_and_forget CreateDeviceDependentResourcesAsync();
 		void CreateWindowSizeDependentResources();
 		void ReleaseDeviceDependentResources();
 		void Update(DX::StepTimer const& timer);
