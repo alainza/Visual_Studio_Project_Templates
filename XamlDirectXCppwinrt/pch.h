@@ -26,6 +26,7 @@
 #include <winrt/Windows.Graphics.h>
 #include <winrt/Windows.Graphics.Display.h>
 #include <winrt/Windows.System.Threading.h>
+#include <robuffer.h>
 #include <dxgi1_4.h>
 #include <d3d11_3.h>
 #include <d2d1_3.h>

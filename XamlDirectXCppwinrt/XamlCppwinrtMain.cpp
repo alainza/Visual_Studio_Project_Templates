@@ -134,7 +134,7 @@ void $projectname$Main::OnDeviceLost()
 // Notifies renderers that device resources may now be recreated.
 void $projectname$Main::OnDeviceRestored()
 {
-	m_sceneRenderer->CreateDeviceDependentResources();
+	m_sceneRenderer->CreateDeviceDependentResourcesAsync();
 	m_fpsTextRenderer->CreateDeviceDependentResources();
 	CreateWindowSizeDependentResources();
 }

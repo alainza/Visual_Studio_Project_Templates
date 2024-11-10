@@ -14,7 +14,7 @@ SampleFpsTextRenderer::SampleFpsTextRenderer(const std::shared_ptr<DX::DeviceRes
 
 	// Create device independent resources
 	winrt::com_ptr<IDWriteTextFormat> textFormat;
-	DX::ThrowIfFailed(
+	winrt::check_hresult(
 		m_deviceResources->GetDWriteFactory()->CreateTextFormat(
 			L"Segoe UI",
 			nullptr,
@@ -29,11 +29,11 @@ SampleFpsTextRenderer::SampleFpsTextRenderer(const std::shared_ptr<DX::DeviceRes
 
 	m_textFormat = textFormat.as<IDWriteTextFormat2>();
 
-	DX::ThrowIfFailed(
+	winrt::check_hresult(
 		m_textFormat->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_NEAR)
 		);
 
-	DX::ThrowIfFailed(
+	winrt::check_hresult(
 		m_deviceResources->GetD2DFactory()->CreateDrawingStateBlock(m_stateBlock.put())
 		);
 
@@ -49,7 +49,7 @@ void SampleFpsTextRenderer::Update(DX::StepTimer const& timer)
 	m_text = (fps > 0) ? std::to_wstring(fps) + L" FPS" : L" - FPS";
 
 	winrt::com_ptr<IDWriteTextLayout> textLayout;
-	DX::ThrowIfFailed(
+	winrt::check_hresult(
 		m_deviceResources->GetDWriteFactory()->CreateTextLayout(
 			m_text.c_str(),
 			(uint32_t) m_text.length(),
@@ -62,7 +62,7 @@ void SampleFpsTextRenderer::Update(DX::StepTimer const& timer)
 
 	m_textLayout = textLayout.as<IDWriteTextLayout3>();
 
-	DX::ThrowIfFailed(m_textLayout->GetMetrics(&m_textMetrics));
+	winrt::check_hresult(m_textLayout->GetMetrics(&m_textMetrics));
 }
 
 // Renders a frame to the screen.
@@ -82,7 +82,7 @@ void SampleFpsTextRenderer::Render()
 
 	context->SetTransform(screenTranslation * m_deviceResources->GetOrientationTransform2D());
 
-	DX::ThrowIfFailed(
+	winrt::check_hresult(
 		m_textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_TRAILING)
 		);
 
@@ -97,7 +97,7 @@ void SampleFpsTextRenderer::Render()
 	HRESULT hr = context->EndDraw();
 	if (hr != D2DERR_RECREATE_TARGET)
 	{
-		DX::ThrowIfFailed(hr);
+		winrt::check_hresult(hr);
 	}
 
 	context->RestoreDrawingState(m_stateBlock.get());
@@ -105,7 +105,7 @@ void SampleFpsTextRenderer::Render()
 
 void SampleFpsTextRenderer::CreateDeviceDependentResources()
 {
-	DX::ThrowIfFailed(
+	winrt::check_hresult(
 		m_deviceResources->GetD2DDeviceContext()->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::White), m_whiteBrush.put())
 		);
 }

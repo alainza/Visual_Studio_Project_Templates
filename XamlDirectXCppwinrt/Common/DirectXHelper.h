@@ -2,26 +2,19 @@
 
 namespace DX
 {
-    inline void ThrowIfFailed(HRESULT hr)
-    {
-        if (FAILED(hr))
-        {
-            // Set a breakpoint on this line to catch Win32 API errors.
-            winrt::throw_hresult(hr);
-        }
-    }
     // Function that reads from a binary file asynchronously.
-    inline std::future<std::vector<byte>> ReadDataAsync(const std::wstring_view& filename)
+    inline winrt::Windows::Foundation::IAsyncAction ReadDataAsync(const std::wstring_view& filename, std::vector<byte>* vector)
     {
         using namespace winrt::Windows::Storage;
         using namespace winrt::Windows::Storage::Streams;
 
-        IBuffer fileBuffer = co_await PathIO::ReadBufferAsync(filename);
+        IBuffer buffer = co_await PathIO::ReadBufferAsync(filename);
 
-        std::vector<byte> returnBuffer;
-        returnBuffer.resize(fileBuffer.Length());
-        DataReader::FromBuffer(fileBuffer).ReadBytes(winrt::array_view<uint8_t>(returnBuffer));
-        return returnBuffer;
+        vector->resize(buffer.Length());
+        winrt::com_ptr<::Windows::Storage::Streams::IBufferByteAccess> byteAccess = buffer.as<::Windows::Storage::Streams::IBufferByteAccess>();
+        byte* rawBuffer{ nullptr };
+        winrt::check_hresult(byteAccess->Buffer(&rawBuffer));
+        CopyMemory(vector->data(), rawBuffer, buffer.Length());
     }
 
     // Converts a length in device-independent pixels (DIPs) to a length in physical pixels.
@@ -32,7 +25,7 @@ namespace DX
     }
 
     winrt::Windows::Graphics::DirectX::Direct3D11::IDirect3DSurface CreateDepthTextureInteropObject(
-        const winrt::com_ptr<ID3D11Texture2D> spTexture2D);
+        const winrt::com_ptr<ID3D11Texture2D>& spTexture2D);
 
 #if defined(_DEBUG)
     // Check for SDK Layer support.

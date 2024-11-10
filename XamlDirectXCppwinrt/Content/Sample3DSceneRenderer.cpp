@@ -16,7 +16,7 @@ Sample3DSceneRenderer::Sample3DSceneRenderer(const std::shared_ptr<DX::DeviceRes
 	m_tracking(false),
 	m_deviceResources(deviceResources)
 {
-	CreateDeviceDependentResources();
+	CreateDeviceDependentResourcesAsync();
 	CreateWindowSizeDependentResources();
 }
 
@@ -182,12 +182,13 @@ void Sample3DSceneRenderer::Render()
 		);
 }
 
-std::future<void> Sample3DSceneRenderer::CreateDeviceDependentResources()
+winrt::fire_and_forget Sample3DSceneRenderer::CreateDeviceDependentResourcesAsync()
 {
 	// After the vertex shader file is loaded, create the shader and input layout.
-	std::vector<byte> vertexShaderFileData = co_await DX::ReadDataAsync(L"ms-appx:///SampleVertexShader.cso");
+	std::vector<byte> vertexShaderFileData;
+	co_await DX::ReadDataAsync(L"ms-appx:///SampleVertexShader.cso", &vertexShaderFileData);
 
-	DX::ThrowIfFailed(
+	winrt::check_hresult(
 		m_deviceResources->GetD3DDevice()->CreateVertexShader(
 			&vertexShaderFileData[0],
 			vertexShaderFileData.size(),
@@ -200,7 +201,7 @@ std::future<void> Sample3DSceneRenderer::CreateDeviceDependentResources()
 		{ "COLOR", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 	};
 
-	DX::ThrowIfFailed(
+	winrt::check_hresult(
 		m_deviceResources->GetD3DDevice()->CreateInputLayout(
 			vertexDesc,
 			ARRAYSIZE(vertexDesc),
@@ -209,8 +210,9 @@ std::future<void> Sample3DSceneRenderer::CreateDeviceDependentResources()
 			m_inputLayout.put()));
 
 	// After the pixel shader file is loaded, create the shader and constant buffer.
-	std::vector<byte> pixelShaderFileData = co_await  DX::ReadDataAsync(L"ms-appx:///SamplePixelShader.cso");
-	DX::ThrowIfFailed(
+	std::vector<byte> pixelShaderFileData;
+	co_await DX::ReadDataAsync(L"ms-appx:///SamplePixelShader.cso", &pixelShaderFileData);
+	winrt::check_hresult(
 		m_deviceResources->GetD3DDevice()->CreatePixelShader(
 			&pixelShaderFileData[0],
 			pixelShaderFileData.size(),
@@ -218,7 +220,7 @@ std::future<void> Sample3DSceneRenderer::CreateDeviceDependentResources()
 			m_pixelShader.put()));
 
 	CD3D11_BUFFER_DESC constantBufferDesc(sizeof(ModelViewProjectionConstantBuffer) , D3D11_BIND_CONSTANT_BUFFER);
-	DX::ThrowIfFailed(
+	winrt::check_hresult(
 		m_deviceResources->GetD3DDevice()->CreateBuffer(
 			&constantBufferDesc,
 			nullptr,
@@ -269,7 +271,7 @@ std::future<void> Sample3DSceneRenderer::CreateDeviceDependentResources()
 	vertexBufferData.SysMemPitch = 0;
 	vertexBufferData.SysMemSlicePitch = 0;
 	CD3D11_BUFFER_DESC vertexBufferDesc(sizeof(cubeVertices), D3D11_BIND_VERTEX_BUFFER);
-	DX::ThrowIfFailed(
+	winrt::check_hresult(
 		m_deviceResources->GetD3DDevice()->CreateBuffer(
 			&vertexBufferDesc,
 			&vertexBufferData,
@@ -310,7 +312,7 @@ std::future<void> Sample3DSceneRenderer::CreateDeviceDependentResources()
 	indexBufferData.SysMemPitch = 0;
 	indexBufferData.SysMemSlicePitch = 0;
 	CD3D11_BUFFER_DESC indexBufferDesc(sizeof(cubeIndices), D3D11_BIND_INDEX_BUFFER);
-	DX::ThrowIfFailed(
+	winrt::check_hresult(
 		m_deviceResources->GetD3DDevice()->CreateBuffer(
 			&indexBufferDesc,
 			&indexBufferData,

@@ -5,7 +5,7 @@
 
 
 winrt::Windows::Graphics::DirectX::Direct3D11::IDirect3DSurface CreateDepthTextureInteropObject(
-	const winrt::com_ptr<ID3D11Texture2D> spTexture2D)
+	const winrt::com_ptr<ID3D11Texture2D>& spTexture2D)
 {
 	// Direct3D interop APIs are used to provide the buffer to the WinRT API.
 	auto depthStencilResource = spTexture2D.as<IDXGIResource1>();

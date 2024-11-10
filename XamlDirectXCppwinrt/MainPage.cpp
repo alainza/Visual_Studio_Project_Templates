@@ -68,7 +68,6 @@ MainPage::MainPage()
 
 	m_main = std::unique_ptr<$projectname$Main>(new $projectname$Main(m_deviceResources));
 	m_main->StartRenderLoop();
-	OutputDebugString(L"Leaving MainPage constructon\n");
 }
 
 MainPage::~MainPage()
