@@ -96,7 +96,7 @@ void MainPage::OnDpiChanged(
 	winrt::Windows::Graphics::Display::DisplayInformation const& sender,
 	winrt::Windows::Foundation::IInspectable const& /*args*/)
 {
-	std::lock_guard<std::mutex> lock(m_main->CriticalSection());
+	concurrency::critical_section::scoped_lock lock(m_main->CriticalSection());
 	// Note: The value for LogicalDpi retrieved here may not match the effective DPI of the app
 	// if it is being scaled for high resolution devices. Once the DPI is set on DeviceResources,
 	// you should always retrieve it using the GetDpi method.
@@ -109,7 +109,7 @@ void MainPage::OnOrientationChanged(
 	winrt::Windows::Graphics::Display::DisplayInformation const& sender,
 	winrt::Windows::Foundation::IInspectable const& /*args*/)
 {
-	std::lock_guard<std::mutex> lock(m_main->CriticalSection());
+	concurrency::critical_section::scoped_lock lock(m_main->CriticalSection());
 	m_deviceResources->SetCurrentOrientation(sender.CurrentOrientation());
 	m_main->CreateWindowSizeDependentResources();
 }
@@ -118,7 +118,7 @@ void MainPage::OnDisplayContentsInvalidated(
 	winrt::Windows::Graphics::Display::DisplayInformation const& /*sender*/,
 	winrt::Windows::Foundation::IInspectable const& /*args*/)
 {
-	std::lock_guard<std::mutex> lock(m_main->CriticalSection());
+	concurrency::critical_section::scoped_lock lock(m_main->CriticalSection());
 	m_deviceResources->ValidateDevice();
 }
 
@@ -162,7 +162,7 @@ void MainPage::OnCompositionScaleChanged(
 	winrt::Windows::UI::Xaml::Controls::SwapChainPanel const& sender,
 	winrt::Windows::Foundation::IInspectable const& /*args*/)
 {
-	std::lock_guard<std::mutex> lock(m_main->CriticalSection());
+	concurrency::critical_section::scoped_lock lock(m_main->CriticalSection());
 	m_deviceResources->SetCompositionScale(sender.CompositionScaleX(), sender.CompositionScaleY());
 	m_main->CreateWindowSizeDependentResources();
 }
@@ -171,7 +171,7 @@ void MainPage::OnSwapChainPanelSizeChanged(
 	winrt::Windows::Foundation::IInspectable const& /*sender*/,
 	winrt::Windows::UI::Xaml::SizeChangedEventArgs const& e)
 {
-	std::lock_guard<std::mutex> lock(m_main->CriticalSection());
+	concurrency::critical_section::scoped_lock lock(m_main->CriticalSection());
 	m_deviceResources->SetLogicalSize(e.NewSize());
 	m_main->CreateWindowSizeDependentResources();
 }

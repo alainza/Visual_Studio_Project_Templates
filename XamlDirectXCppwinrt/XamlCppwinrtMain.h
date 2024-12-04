@@ -25,7 +25,7 @@ namespace winrt::$projectname$::implementation
 		virtual void OnDeviceLost();
 		virtual void OnDeviceRestored();
 
-		std::mutex& CriticalSection()
+		Concurrency::critical_section& CriticalSection()
 		{
 			return m_criticalSection;
 		}
@@ -43,7 +43,7 @@ namespace winrt::$projectname$::implementation
 		std::unique_ptr<SampleFpsTextRenderer> m_fpsTextRenderer;
 
 		winrt::Windows::Foundation::IAsyncAction m_renderLoopWorker{ nullptr };
-		std::mutex m_criticalSection;
+		Concurrency::critical_section m_criticalSection;
 
 		// Rendering loop timer.
 		DX::StepTimer m_timer;

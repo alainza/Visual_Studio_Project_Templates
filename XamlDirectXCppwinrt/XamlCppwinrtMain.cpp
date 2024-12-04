@@ -53,7 +53,7 @@ void $projectname$Main::StartRenderLoop()
 		// Calculate the updated frame and render once per vertical blanking interval.
 		while (action.Status() == AsyncStatus::Started)
 		{
-			std::lock_guard<std::mutex> lock(m_criticalSection);
+			concurrency::critical_section::scoped_lock lock(m_criticalSection);
 			Update();
 			if (Render())
 			{
